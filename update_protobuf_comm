@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TEMPDIR=$(mktemp -d)
+DESTDIR=./libs/protobuf_comm
+
+git clone http://git.fawkesrobotics.org/llsf-refbox.git ${TEMPDIR} &&
+rm -rfv ${DESTDIR} &&
+cp -rv ${TEMPDIR}/src/libs/protobuf_comm/ ${DESTDIR} &&
+rm -rfv ${TEMPDIR} &&
+rm -rfv ${DESTDIR}/qa/ ${DESTDIR}/Makefile ${DESTDIR}/server.* ${DESTDIR}/client.* &&
+echo === Done updating protobuf_comm

@@ -1,0 +1,36 @@
+/*
+ * Copyright 2014 Instituto de Sistemas e Robotica, Instituto Superior Tecnico
+ *
+ * This file is part of RoAH RSBB Comm.
+ *
+ * RoAH RSBB Comm is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * RoAH RSBB Comm is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with RoAH RSBB Comm.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package roah_rsbb_msgs;
+
+option java_package = "eu.rockin.roah_rsbb_msgs";
+option java_outer_classname = "BenchmarkStateProtos";
+
+message BenchmarkState {
+  enum CompType {
+    COMP_ID  = 6666;
+    MSG_TYPE = 20;
+  }
+
+  // The type of benchmark ([tf][123])
+  required string benchmark_type = 1;
+
+  // The state TODO
+  required string benchmark_state = 2;
+}

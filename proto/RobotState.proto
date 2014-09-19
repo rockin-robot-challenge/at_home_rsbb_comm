@@ -1,0 +1,40 @@
+/*
+ * Copyright 2014 Instituto de Sistemas e Robotica, Instituto Superior Tecnico
+ *
+ * This file is part of RoAH RSBB Comm.
+ *
+ * RoAH RSBB Comm is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * RoAH RSBB Comm is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with RoAH RSBB Comm.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package roah_rsbb_msgs;
+
+import "Time.proto";
+
+option java_package = "eu.rockin.roah_rsbb_msgs";
+option java_outer_classname = "RobotStateProtos";
+
+message RobotState {
+  enum CompType {
+    COMP_ID  = 6666;
+    MSG_TYPE = 40;
+  }
+
+  // UTC time, to check clock synchronization
+  required Time time = 1;
+  
+  // Number of messages saved by the offline data saver
+  required uint32 messages_saved = 2;
+  
+  // TODO robot state
+}

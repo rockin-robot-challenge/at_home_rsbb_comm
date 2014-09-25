@@ -79,7 +79,7 @@ class DumpComm
                          uint16_t msg_type,
                          shared_ptr<const roah_rsbb_msgs::RoahRsbbBeacon> rsbb_beacon)
     {
-      cout << "Received RobotState from " << endpoint.address().to_string()
+      cout << "Received RoahRsbbBeacon from " << endpoint.address().to_string()
            << ":" << endpoint.port()
            << ", COMP_ID " << comp_id
            << ", MSG_TYPE " << msg_type << endl;

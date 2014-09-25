@@ -21,7 +21,7 @@ and OpenSSL.
 
 If you are using Ubuntu, install the dependencies with:
 ```
-sudo apt-get install build-essential cmake libboost-all-dev libprotoc-dev libssl-dev
+sudo apt-get install build-essential cmake libboost-all-dev libprotoc-dev protobuf-compiler libssl-dev
 ```
 
 This was tested with Ubuntu 12.04.5 LTS (Precise Pangolin) and

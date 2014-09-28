@@ -193,7 +193,7 @@ namespace roah_rsbb
       }
 
       std::shared_ptr<const roah_rsbb_msgs::RobotBeacon>
-      last_robot_beacon() const
+      last_robot_beacon()
       {
         std::shared_ptr<const roah_rsbb_msgs::RobotBeacon> ret;
         {
@@ -216,7 +216,7 @@ namespace roah_rsbb
       }
 
       std::shared_ptr<const roah_rsbb_msgs::RoahRsbbBeacon>
-      last_rsbb_beacon() const
+      last_rsbb_beacon()
       {
         std::shared_ptr<const roah_rsbb_msgs::RoahRsbbBeacon> ret;
         {
@@ -299,7 +299,7 @@ namespace roah_rsbb
       }
 
       std::shared_ptr<const roah_rsbb_msgs::BenchmarkState>
-      last_benchmark_state() const
+      last_benchmark_state()
       {
         std::shared_ptr<const roah_rsbb_msgs::BenchmarkState> ret;
         {
@@ -322,7 +322,7 @@ namespace roah_rsbb
       }
 
       std::shared_ptr<const roah_rsbb_msgs::RobotState>
-      last_robot_state() const
+      last_robot_state()
       {
         std::shared_ptr<const roah_rsbb_msgs::RobotState> ret;
         {

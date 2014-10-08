@@ -30,6 +30,10 @@ message RoahRsbbBeacon {
 
   // The teams that should be active benchmarking
   repeated BenchmarkingTeam benchmarking_teams = 1;
+
+  // True means the tablet should display the map
+  // False means it should display the call button
+  required bool display_map = 2;
 }
 
 message BenchmarkingTeam {

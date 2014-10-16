@@ -9,7 +9,7 @@ add_definitions("-DHAVE_LIBCRYPTO")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 file(GLOB PROTOBUF_COMM_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/protobuf_comm/*.cpp)
-add_library(protobuf_comm STATIC ${PROTOBUF_COMM_SOURCES})
-target_link_libraries(protobuf_comm ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES})
+add_library(${DISAMBIGUATION}protobuf_comm STATIC ${PROTOBUF_COMM_SOURCES})
+target_link_libraries(${DISAMBIGUATION}protobuf_comm ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES})
 
 set(INCLUDE_DIRS ${INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)

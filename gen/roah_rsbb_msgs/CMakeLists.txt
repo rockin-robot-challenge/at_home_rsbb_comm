@@ -3,8 +3,8 @@ include_directories(${PROTOBUF_INCLUDE_DIRS})
 
 file(GLOB ROAH_RSBB_MSGS_PROTOS ${CMAKE_CURRENT_SOURCE_DIR}/../../proto/*.proto)
 protobuf_generate_cpp(RSBB_PROTO_SRCS RSBB_PROTO_HDRS ${ROAH_RSBB_MSGS_PROTOS})
-add_library(roah_rsbb_msgs STATIC ${RSBB_PROTO_SRCS})
-target_link_libraries(roah_rsbb_msgs ${PROTOBUF_LIBRARIES})
+add_library(${DISAMBIGUATION}roah_rsbb_msgs STATIC ${RSBB_PROTO_SRCS})
+target_link_libraries(${DISAMBIGUATION}roah_rsbb_msgs ${PROTOBUF_LIBRARIES})
 
 set(ROAH_RSBB_MSGS_HPP "${CMAKE_CURRENT_BINARY_DIR}/../roah_rsbb_msgs.h")
 file(REMOVE ${ROAH_RSBB_MSGS_HPP})

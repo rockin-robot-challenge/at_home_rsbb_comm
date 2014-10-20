@@ -27,6 +27,7 @@ sudo apt-get install build-essential cmake libboost-all-dev libprotoc-dev protob
 This was tested with Ubuntu 12.04.5 LTS (Precise Pangolin) and
 14.04.1 LTS (Trusty Tahr).
 
+
 ## Compiling
 
 To compile, use:
@@ -41,6 +42,7 @@ lib/libroah_rsbb_msgs.a
 lib/libprotobuf_comm.a
 ```
 
+
 ## Using roah_rsbb.h
 
 This C++ header file provides a small decorator on top of
@@ -50,3 +52,12 @@ provide a pooling interface for the last messages of the allowed
 types received on each channel as well as a specific signal for each
 one. Be careful with synchronization, the callbacks will be called
 from different threads.
+
+
+## Using ros_roah_rsbb.h
+
+The classes `RosPublicChannel` and `RosPrivateChannel` provide
+a way to use `PublicChannel` and `PrivateChannel` with error output
+done by ROS. Include this file only if your project uses ROS.
+If your project uses some other framework, you can use this file
+as a base to adapt to your framework.

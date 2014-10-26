@@ -24,6 +24,7 @@
 
 #include <ros/console.h>
 #include <ros/param.h>
+#include <ros/time.h>
 
 #include "roah_rsbb.h"
 
@@ -31,6 +32,21 @@
 
 namespace roah_rsbb
 {
+  inline void
+  ros_to_proto_time (ros::Time const& ros, ::roah_rsbb_msgs::Time* proto)
+  {
+    proto->set_sec (ros.sec);
+    proto->set_nsec (ros.nsec);
+  }
+
+  inline ros::Time
+  proto_to_ros_time (::roah_rsbb_msgs::Time const& proto)
+  {
+    return ros::Time (proto.sec(), proto.nsec());
+  }
+
+
+
   class RosErrorHandler
   {
     public:

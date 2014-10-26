@@ -30,17 +30,32 @@
 
 namespace roah_rsbb
 {
-  void
+  inline void
+  boost_to_proto_time (boost::posix_time::ptime const& boost, ::roah_rsbb_msgs::Time* proto)
+  {
+    boost::posix_time::time_duration diff = boost - boost::posix_time::from_time_t (0);
+    proto->set_sec (diff.total_seconds());
+#if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
+    proto->set_nsec (diff.fractional_seconds());
+#else
+    proto->set_nsec (diff.fractional_seconds() * 1000);
+#endif
+  }
+
+  inline boost::posix_time::ptime
+  proto_to_boost_time (::roah_rsbb_msgs::Time const& proto)
+  {
+#if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
+    return boost::posix_time::from_time_t (proto.sec()) + boost::posix_time::nanoseconds (proto.nsec());
+#else
+    return boost::posix_time::from_time_t (proto.sec()) + boost::posix_time::microseconds (proto.nsec() / 1000.0);
+#endif
+  }
+
+  inline void
   now (::roah_rsbb_msgs::Time* time_msg)
   {
-    boost::posix_time::ptime now = boost::posix_time::microsec_clock::universal_time();
-    boost::posix_time::time_duration diff = now - boost::posix_time::from_time_t (0);
-    time_msg->set_sec (diff.total_seconds());
-#if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
-    time_msg->set_nsec (diff.fractional_seconds());
-#else
-    time_msg->set_nsec (diff.fractional_seconds() * 1000);
-#endif
+    boost_to_proto_time (boost::posix_time::microsec_clock::universal_time(), time_msg);
   }
 
 

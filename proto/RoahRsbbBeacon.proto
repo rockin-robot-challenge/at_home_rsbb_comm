@@ -19,6 +19,8 @@
 
 package roah_rsbb_msgs;
 
+import "Time.proto";
+
 option java_package = "eu.rockin.roah_rsbb_msgs";
 option java_outer_classname = "RoahRsbbBeaconProtos";
 
@@ -31,9 +33,41 @@ message RoahRsbbBeacon {
   // The teams that should be active benchmarking
   repeated BenchmarkingTeam benchmarking_teams = 1;
 
+
+  // Last time the bell was rung
+  required Time devices_bell = 10;
+
+  // State of switch 1
+  required bool devices_switch_1 = 11;
+
+  // State of switch 2
+  required bool devices_switch_2 = 12;
+
+  // State of switch 3
+  required bool devices_switch_3 = 13;
+
+  // State of dimmer (0-100)
+  required uint32 devices_dimmer = 14;
+
+  // State of blinds (0-100)
+  required uint32 devices_blinds = 15;
+
+
   // True means the tablet should display the map
   // False means it should display the call button
-  required bool display_map = 2;
+  required bool tablet_display_map = 20;
+  
+  // UTC time of the last time the user used the call button on the tablet
+  required Time tablet_call_time = 21;
+  
+  // UTC time of the last time the user selected a position on the tablet
+  required Time tablet_position_time = 22;
+  
+  // Last user selected position on the tablet, X
+  required double tablet_position_x = 23;
+  
+  // Last user selected position on the tablet, Y
+  required double tablet_position_y = 24;
 }
 
 message BenchmarkingTeam {

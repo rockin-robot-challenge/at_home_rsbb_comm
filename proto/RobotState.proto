@@ -30,11 +30,58 @@ message RobotState {
     MSG_TYPE = 40;
   }
 
-  // UTC time, to check clock synchronization
+  // UTC time, to check clock synchronization and send acknowledgements
   required Time time = 1;
   
   // Number of messages saved by the offline data saver
   required uint32 messages_saved = 2;
+
+  enum State {
+    STOP = 0;
+    PREPARING = 1;
+    WAITING_GOAL = 2;
+    EXECUTING = 3;
+    RESULT_TX = 4;
+  }
   
-  // TODO robot state
+  // The state of the robot in the benchmark
+  required State robot_state = 3;
+  
+  // For all repeated string fields:
+  // Repeated equal strings are ignored by the RSBB unless a message
+  // that doesn't contain the string is received in between
+  
+  // HWV, HOMF: Notifications issued
+  repeated string notifications = 8;
+  // HWV: Activation event
+  repeated string activation_event = 9;
+  // HWV: Visitor
+  repeated string visitor = 10;
+  
+  // HCFGAC: Final command given
+  repeated string final_command = 16;
+  // HCFGAC: State of switch 1
+  optional bool devices_switch_1 = 17;
+  // HCFGAC: State of switch 2
+  optional bool devices_switch_2 = 18;
+  // HCFGAC:  State of switch 3
+  optional bool devices_switch_3 = 19;
+  // HCFGAC: State of dimmer (0-100)
+  optional uint32 devices_dimmer = 20;
+  // HCFGAC: State of blinds (0-100)
+  optional uint32 devices_blinds = 21;
+  // HCFGAC: True means the tablet should display the map
+  // False means it should display the call button
+  optional bool tablet_display_map = 22;
+  
+  // HOPF: Object class
+  optional string object_class = 32;
+  // HOPF: Object name
+  optional string object_name = 33;
+  // HOPF: Object position, X
+  optional double object_pose_x = 34;
+  // HOPF: Object position, Y
+  optional double object_pose_y = 35;
+  // HOPF: Object position, Theta
+  optional double object_pose_theta = 36;
 }

@@ -4,6 +4,7 @@ project (RoAH_RSBB_Comm)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
+add_definitions("-Wall")
 add_definitions("-std=c++0x")
 
 add_subdirectory(gen/roah_rsbb_msgs/)

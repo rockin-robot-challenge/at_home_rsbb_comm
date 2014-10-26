@@ -19,6 +19,8 @@
 
 package roah_rsbb_msgs;
 
+import "Time.proto";
+
 option java_package = "eu.rockin.roah_rsbb_msgs";
 option java_outer_classname = "BenchmarkStateProtos";
 
@@ -28,9 +30,25 @@ message BenchmarkState {
     MSG_TYPE = 20;
   }
 
-  // The type of benchmark ([tf][123])
+  // The type of benchmark (HGTKMH, HWV, HCFGAC, HOPF, HOMF, HSUF)
   required string benchmark_type = 1;
 
-  // The state TODO
-  required string benchmark_state = 2;
+  enum State {
+    STOP = 0;
+    PREPARE = 1;
+    GOAL_TX = 2;
+    WAITING_RESULT = 3;
+  }
+  
+  // The state of the benchmark
+  required State benchmark_state = 2;
+
+  // Time in the last message received from the robot
+  // Items up to that message do not need to be retransmitted
+  optional Time acknowledgement = 3;
+  
+  // HOMF: initial state of the switches, in order
+  repeated bool initial_state = 8;
+  // HOMF: switches to be toggled, by this order
+  repeated uint32 switches = 9;
 }

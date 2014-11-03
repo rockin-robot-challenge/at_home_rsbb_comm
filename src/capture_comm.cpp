@@ -129,6 +129,23 @@ class DumpComm
            << flush;
     }
 
+    static void
+    receive_tablet_beacon (boost::asio::ip::udp::endpoint& endpoint,
+                           uint16_t comp_id,
+                           uint16_t msg_type,
+                           shared_ptr<const roah_rsbb_msgs::TabletBeacon> msg)
+    {
+      cout << "Received TabletBeacon from " << endpoint.address().to_string()
+           << ":" << endpoint.port()
+           << ", COMP_ID " << comp_id
+           << ", MSG_TYPE " << msg_type << endl
+           << "  last_call: " << msg->last_call().sec() << "." << msg->last_call().nsec() << endl
+           << "  last_pos: " << msg->last_pos().sec() << "." << msg->last_pos().nsec() << endl
+           << "  x: " << msg->x() << endl
+           << "  y: " << msg->y() << endl
+           << flush;
+    }
+
   public:
     DumpComm (string const& host,
               unsigned short port) :
@@ -142,6 +159,7 @@ class DumpComm
            << ":" << port << endl << flush;
       public_channel_.signal_rsbb_beacon_received().connect (boost::bind (&DumpComm::receive_rsbb_beacon, this, _1, _2, _3, _4));
       public_channel_.signal_robot_beacon_received().connect (&DumpComm::receive_robot_beacon);
+      public_channel_.signal_tablet_beacon_received().connect (&DumpComm::receive_tablet_beacon);
     }
 
     void run()

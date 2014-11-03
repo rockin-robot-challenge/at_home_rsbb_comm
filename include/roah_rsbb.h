@@ -193,6 +193,7 @@ namespace roah_rsbb
         protobuf_comm::MessageRegister& mr = this->message_register();
         mr.add_message_type<roah_rsbb_msgs::RobotBeacon>();
         mr.add_message_type<roah_rsbb_msgs::RoahRsbbBeacon>();
+        mr.add_message_type<roah_rsbb_msgs::TabletBeacon>();
       }
 
       typedef
@@ -241,6 +242,29 @@ namespace roah_rsbb
         return ret;
       }
 
+      typedef
+      boost::signals2::signal<void (boost::asio::ip::udp::endpoint&,
+                                    uint16_t,
+                                    uint16_t,
+                                    std::shared_ptr<const roah_rsbb_msgs::TabletBeacon>) >
+      signal_tablet_beacon_received_type;
+
+      signal_tablet_beacon_received_type& signal_tablet_beacon_received()
+      {
+        return signal_tablet_beacon_received_;
+      }
+
+      std::shared_ptr<const roah_rsbb_msgs::TabletBeacon>
+      last_tablet_beacon()
+      {
+        std::shared_ptr<const roah_rsbb_msgs::TabletBeacon> ret;
+        {
+          std::lock_guard<std::mutex> lock (tablet_beacon_mutex_);
+          ret = last_tablet_beacon_;
+        }
+        return ret;
+      }
+
     private:
       signal_robot_beacon_received_type signal_robot_beacon_received_;
       std::mutex robot_beacon_mutex_;
@@ -249,6 +273,10 @@ namespace roah_rsbb
       signal_rsbb_beacon_received_type signal_rsbb_beacon_received_;
       std::mutex rsbb_beacon_mutex_;
       std::shared_ptr<const roah_rsbb_msgs::RoahRsbbBeacon> last_rsbb_beacon_;
+
+      signal_tablet_beacon_received_type signal_tablet_beacon_received_;
+      std::mutex tablet_beacon_mutex_;
+      std::shared_ptr<const roah_rsbb_msgs::TabletBeacon> last_tablet_beacon_;
 
       bool
       recv_msg (boost::asio::ip::udp::endpoint& endpoint,
@@ -276,6 +304,18 @@ namespace roah_rsbb
           }
 
           signal_rsbb_beacon_received_ (endpoint, comp_id, msg_type, rsbb_beacon);
+
+          return true;
+        }
+
+        auto tablet_beacon = std::dynamic_pointer_cast<roah_rsbb_msgs::TabletBeacon> (msg);
+        if (tablet_beacon) {
+          {
+            std::lock_guard<std::mutex> lock (tablet_beacon_mutex_);
+            last_tablet_beacon_ = tablet_beacon;
+          }
+
+          signal_tablet_beacon_received_ (endpoint, comp_id, msg_type, tablet_beacon);
 
           return true;
         }

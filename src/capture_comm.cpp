@@ -37,8 +37,6 @@ const string CRYPTO_CIPHER = "aes-128-cbc";
 
 class DumpComm
 {
-    string host_;
-    unsigned short port_;
     PublicChannel<> public_channel_;
     mutex private_channel_mutex_;
     shared_ptr<PrivateChannel<>> private_channel_;
@@ -149,8 +147,6 @@ class DumpComm
   public:
     DumpComm (string const& host,
               unsigned short port) :
-      host_ (host),
-      port_ (port),
       public_channel_ (host, port),
       private_channel_mutex_(),
       private_channel_()
@@ -199,6 +195,10 @@ int
 main (int argc,
       char** argv)
 {
-  DumpComm comm ("10.255.255.255", 6666);
+  string host = "10.255.255.255";
+  if (argc > 1) {
+    host = argv[1];
+  }
+  DumpComm comm (host, 6666);
   comm.run();
 }

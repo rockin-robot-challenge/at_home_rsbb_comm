@@ -198,7 +198,7 @@ namespace roah_rsbb
       set_rsbb_beacon_callback (void (T::*callback) (boost::asio::ip::udp::endpoint, uint16_t, uint16_t, std::shared_ptr<const roah_rsbb_msgs::RoahRsbbBeacon>),
                                 T* obj)
       {
-        return set_rsbb_beacon_callback (boost::bind (callback, obj, _1, _2, _3, _4));
+        set_rsbb_beacon_callback (boost::bind (callback, obj, _1, _2, _3, _4));
       }
 
       void
@@ -211,7 +211,7 @@ namespace roah_rsbb
       set_robot_beacon_callback (void (T::*callback) (boost::asio::ip::udp::endpoint, uint16_t, uint16_t, std::shared_ptr<const roah_rsbb_msgs::RobotBeacon>),
                                  T* obj)
       {
-        return set_robot_beacon_callback (boost::bind (callback, obj, _1, _2, _3, _4));
+        set_robot_beacon_callback (boost::bind (callback, obj, _1, _2, _3, _4));
       }
 
       void
@@ -224,7 +224,7 @@ namespace roah_rsbb
       set_tablet_beacon_callback (void (T::*callback) (boost::asio::ip::udp::endpoint, uint16_t, uint16_t, std::shared_ptr<const roah_rsbb_msgs::TabletBeacon>),
                                   T* obj)
       {
-        return set_tablet_beacon_callback (boost::bind (callback, obj, _1, _2, _3, _4));
+        set_tablet_beacon_callback (boost::bind (callback, obj, _1, _2, _3, _4));
       }
   };
 
@@ -290,7 +290,7 @@ namespace roah_rsbb
       set_benchmark_state_callback (void (T::*callback) (boost::asio::ip::udp::endpoint, uint16_t, uint16_t, std::shared_ptr<const roah_rsbb_msgs::BenchmarkState>),
                                     T* obj)
       {
-        return set_benchmark_state_callback (boost::bind (callback, obj, _1, _2, _3, _4));
+        set_benchmark_state_callback (boost::bind (callback, obj, _1, _2, _3, _4));
       }
 
       void
@@ -303,7 +303,7 @@ namespace roah_rsbb
       set_robot_state_callback (void (T::*callback) (boost::asio::ip::udp::endpoint, uint16_t, uint16_t, std::shared_ptr<const roah_rsbb_msgs::RobotState>),
                                 T* obj)
       {
-        return set_robot_state_callback (boost::bind (callback, obj, _1, _2, _3, _4));
+        set_robot_state_callback (boost::bind (callback, obj, _1, _2, _3, _4));
       }
   };
 }

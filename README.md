@@ -186,10 +186,10 @@ the robot state is `EXECUTING`, the robot should execute the goal.
 For reference, the RSBB can be expected to update according to the
 following transition table on its end.
 
-|                  | **STOP**                                | **PREPARE**               | **GOAL_TX**                            | **WAITING_RESULT**                        |
-|-----------------:|:---------------------------------------:|:-------------------------:|:--------------------------------------:|:-----------------------------------------:|
-|         **STOP** | Keep or start <br/> `STOP` or `PREPARE` | Keep      <br/> `PREPARE` | Retry           <br/> `PREPARE`        | Retry           <br/> `PREPARE`           |
-|    **PREPARING** | Error         <br/> `STOP`              | Keep      <br/> `PREPARE` | Retry           <br/> `PREPARE`        | Retry           <br/> `PREPARE`           |
-| **WAITING_GOAL** | Error         <br/> `STOP`              | Send goal <br/> `GOAL_TX` | Keep            <br/> `GOAL_TX`        | Retry           <br/> `PREPARE`           |
-|    **EXECUTING** | Error         <br/> `STOP`              | Retry     <br/> `PREPARE` | Wait for result <br/> `WAITING_RESULT` | Keep            <br/> `WAITING_RESULT`    |
-|    **RESULT_TX** | Error         <br/> `STOP`              | Retry     <br/> `PREPARE` | Retry           <br/> `PREPARE`        | New goal or end <br/> `PREPARE` or `STOP` |
+|                  | **STOP**                                | **PREPARE**                                              | **GOAL_TX**                               | **WAITING_RESULT**                        |
+|-----------------:|:---------------------------------------:|:--------------------------------------------------------:|:-----------------------------------------:|:-----------------------------------------:|
+|         **STOP** | Keep or start <br/> `STOP` or `PREPARE` | Keep                 <br/> `PREPARE`                     | Retry           <br/> `PREPARE`           | Retry           <br/> `PREPARE`           |
+|    **PREPARING** | Error         <br/> `STOP`              | Keep                 <br/> `PREPARE`                     | Retry           <br/> `PREPARE`           | Retry           <br/> `PREPARE`           |
+| **WAITING_GOAL** | Error         <br/> `STOP`              | Send goal or no goal <br/> `GOAL_TX` or `WAITING_RESULT` | Keep            <br/> `GOAL_TX`           | Retry           <br/> `PREPARE`           |
+|    **EXECUTING** | Error         <br/> `STOP`              | Retry                <br/> `PREPARE`                     | Wait for result <br/> `WAITING_RESULT`    | Keep            <br/> `WAITING_RESULT`    |
+|    **RESULT_TX** | Error         <br/> `STOP`              | Retry                <br/> `PREPARE`                     | New goal or end <br/> `PREPARE` or `STOP` | New goal or end <br/> `PREPARE` or `STOP` |

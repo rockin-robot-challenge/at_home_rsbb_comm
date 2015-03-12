@@ -15,9 +15,8 @@ RoAH RSBB.
 
 :warning: Please remember to always update right before the competitions!
 ```bash
-cd roah_rsbb_comm_ros/
+cd roah_rsbb_comm/
 git pull
-git submodule update --init --recursive
 ```
 
 

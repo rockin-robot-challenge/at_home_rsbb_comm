@@ -46,9 +46,8 @@ message BenchmarkState {
   // Time in the last message received from the robot
   // Items up to that message do not need to be retransmitted
   optional Time acknowledgement = 3;
-  
-  // HOMF: initial state of the switches, in order
-  repeated bool initial_state = 8;
-  // HOMF: switches to be toggled, by this order
-  repeated uint32 switches = 9;
+
+  optional double target_pose_x = 10;
+  optional double target_pose_y = 11;
+  optional double target_pose_theta = 12;
 }

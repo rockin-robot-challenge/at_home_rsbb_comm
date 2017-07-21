@@ -84,4 +84,8 @@ message RobotState {
   optional double object_pose_y = 35;
   // HOPF: Object position, Theta
   optional double object_pose_theta = 36;
+  
+  // Generic benchmark goal's result
+  optional string generic_result = 37;
+  
 }

@@ -52,6 +52,8 @@ message RoahRsbbBeacon {
   // State of blinds (0-100)
   required uint32 devices_blinds = 15;
 
+  // State of door/window detector
+  required bool devices_door_win_detect = 16;
 
   // True means the tablet should display the map
   // False means it should display the call button

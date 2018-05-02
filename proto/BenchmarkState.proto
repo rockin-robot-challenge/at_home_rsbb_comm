@@ -50,4 +50,8 @@ message BenchmarkState {
   optional double target_pose_x = 10;
   optional double target_pose_y = 11;
   optional double target_pose_theta = 12;
+  
+  // Generic benchmark goal yaml string
+  optional string generic_goal = 13;
+  
 }

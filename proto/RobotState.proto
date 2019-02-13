@@ -87,5 +87,14 @@ message RobotState {
   
   // Generic benchmark goal's result
   optional string generic_result = 37;
+
+  // HPPF: Person name
+  optional string person_name = 38
+  // HPPF: Person position, X
+  optional double person_pose_x = 39
+  // HPPF: Person position, Y
+  optional double person_pose_y = 40
+  // HPPF: Person position, Theta
+  optional double person_pose_theta = 41
   
 }

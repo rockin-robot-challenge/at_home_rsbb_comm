@@ -115,26 +115,29 @@ BufferEncryptor::encrypt(const std::string &plain, std::string &enc)
     enc_m += iv_size;
   }
 
-  EVP_CIPHER_CTX ctx;
-  if ( ! EVP_EncryptInit(&ctx, evp_cipher, key_, iv_hash))
+  EVP_CIPHER_CTX *ctx;
+  ctx = EVP_CIPHER_CTX_new();
+  if ( ! EVP_EncryptInit(ctx, evp_cipher, key_, iv_hash))
   {
     throw std::runtime_error("Could not initialize cipher context");
   }
 
   int outl = enc.size() - iv_size;
-  if ( ! EVP_EncryptUpdate(&ctx, enc_m, &outl,
+  if ( ! EVP_EncryptUpdate(ctx, enc_m, &outl,
 			   (unsigned char *)plain.c_str(), plain.size()) )
   {
     throw std::runtime_error("EncryptUpdate failed");
   }
 
   int plen = 0;
-  if ( ! EVP_EncryptFinal_ex(&ctx, enc_m + outl, &plen) ) {
+  if ( ! EVP_EncryptFinal_ex(ctx, enc_m + outl, &plen) ) {
     throw std::runtime_error("EncryptFinal failed");
   }
   outl += plen;
  
   enc.resize(outl + iv_size);
+
+  EVP_CIPHER_CTX_free(ctx);
 #else
   throw std::runtime_error("Encryption support not available");
 #endif
@@ -231,24 +234,27 @@ BufferDecryptor::decrypt(int cipher, const void *enc, size_t enc_size, void *pla
   unsigned char *enc_m = (unsigned char *)enc + iv_size;
   enc_size -= iv_size;
 
-  EVP_CIPHER_CTX ctx;
-  if ( ! EVP_DecryptInit(&ctx, evp_cipher, (const unsigned char *)keys_[cipher].c_str(), iv))
+  EVP_CIPHER_CTX *ctx;
+  ctx = EVP_CIPHER_CTX_new();
+  if ( ! EVP_DecryptInit(ctx, evp_cipher, (const unsigned char *)keys_[cipher].c_str(), iv))
   {
     throw std::runtime_error("Could not initialize cipher context");
   }
 
   int outl = plain_size;
-  if ( ! EVP_DecryptUpdate(&ctx,
+  if ( ! EVP_DecryptUpdate(ctx,
 			   (unsigned char *)plain, &outl, enc_m, enc_size))
   {
     throw std::runtime_error("DecryptUpdate failed");
   }
 
   int plen = 0;
-  if ( ! EVP_DecryptFinal(&ctx, (unsigned char *)plain + outl, &plen) ) {
+  if ( ! EVP_DecryptFinal(ctx, (unsigned char *)plain + outl, &plen) ) {
     throw std::runtime_error("DecryptFinal failed");
   }
   outl += plen;
+
+  EVP_CIPHER_CTX_free(ctx);
 
   return outl;
 #else

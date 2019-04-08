@@ -74,18 +74,6 @@ message RobotState {
   // False means it should display the call button
   optional bool tablet_display_map = 22;
   
-  // HOPF: Object class
-  optional string object_class = 32;
-  // HOPF: Object name
-  optional string object_name = 33;
-  // HOPF: Object position, X
-  optional double object_pose_x = 34;
-  // HOPF: Object position, Y
-  optional double object_pose_y = 35;
-  // HOPF: Object position, Theta
-  optional double object_pose_theta = 36;
-  
   // Generic benchmark goal's result
-  optional string generic_result = 37;
-  
+  optional string generic_result = 23;
 }
